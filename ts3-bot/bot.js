@@ -28,8 +28,6 @@ app.use('/bot', botRoutes); // Use the bot routes
 const MONGODB_URI = process.env.MONGODB_URI;
 
 mongoose.connect(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000,
 })
   .then(() => console.log('Connected to MongoDB'))
@@ -82,148 +80,35 @@ const authenticate = (req, res, next) => {
   }
 };
 
-// Initialize TS3 Client
-let client;
-let isConnected = false;
-
-const initializeClient = async () => {
-  try {
-    const credentials = await TS3Credentials.findById('ts3_credentials');
-    if (!credentials) {
-      throw new Error('TS3 credentials not found in the database');
-    }
-
-    client = await TeamSpeak.connect({
-      host: credentials.host,
-      queryport: credentials.port,
-      username: credentials.username,
-      password: credentials.password,
-      nickname: credentials.nickname,
-      serverport: 9987,
-      serverid: credentials.serverId,
-    });
-
-    isConnected = true;
-    logger.info('Connected to TS3 server successfully.');
-
-    client.on('close', () => {
-      isConnected = false;
-      logger.warn('TS3 Client disconnected.');
-    });
-
-    client.on('error', (error) => {
-      logger.error(`TS3 Client Error: ${error.message}`);
-    });
-  } catch (error) {
-    logger.error(`Error initializing TS3 Client: ${error.message}`);
-  }
-};
+const botController = require('../src/controllers/botController');
 
 // Example endpoint to get bot status
-app.get('/status', authenticate, async (req, res) => {
-  try {
-    logger.info('Received request for bot status');
-    if (isConnected && client) {
-      const serverGroups = await client.serverGroupList();
-      const clients = await client.clientList();
-      res.json({
-        status: 'online',
-        channel: client.channel,
-        serverGroups: serverGroups.map(group => ({
-          id: group.sgid,
-          name: group.name,
-        })),
-        clients: clients.map(client => ({
-          id: client.clid,
-          nickname: client.nickname,
-        })),
-      });
-    } else {
-      res.json({ status: 'offline' });
-    }
-  } catch (error) {
-    logger.error(`Error fetching bot status: ${error.message}`, { stack: error.stack });
-    res.status(500).json({ message: 'Failed to fetch bot status.', error: error.message });
-  }
-});
+app.get('/status', authenticate, botController.getStatus);
 
 // Endpoint to fetch current settings
-app.get('/bot/settings', async (req, res) => {
-  try {
-    const credentials = await TS3Credentials.findById('ts3_credentials');
-    if (!credentials) {
-      return res.status(404).json({ message: 'TS3 credentials not found' });
-    }
-    res.json({
-      host: credentials.host,
-      port: credentials.port,
-      username: credentials.username,
-      password: credentials.password,
-      nickname: credentials.nickname,
-      serverId: credentials.serverId,
-      channelId: credentials.channelId,
-    });
-  } catch (error) {
-    console.error(`Error fetching credentials: ${error.message}`);
-    res.status(500).json({ message: 'Failed to fetch credentials.', error: error.message });
-  }
-});
+app.get('/bot/settings', authenticate, botController.updateSettings);
 
 // Endpoint to update settings
-app.post('/bot/settings', async (req, res) => {
-  try {
-    const { host, port, username, password, nickname, serverId, channelId } = req.body;
-    const credentials = await TS3Credentials.findByIdAndUpdate(
-      'ts3_credentials',
-      { host, port, username, password, nickname, serverId, channelId },
-      { new: true, upsert: true }
-    );
-    res.json({ message: 'Settings updated successfully', credentials });
-  } catch (error) {
-    console.error(`Error updating settings: ${error.message}`);
-    res.status(500).json({ message: 'Failed to update settings.', error: error.message });
-  }
-});
+app.post('/bot/settings', authenticate, botController.updateSettings);
 
 // Endpoint to handle connect and disconnect commands
-app.post('/command', authenticate, async (req, res) => {
-  const { command } = req.body;
-  try {
-    if (command === 'connect') {
-      if (!isConnected) {
-        await initializeClient();
-        res.json({ message: 'Connected to TS3 server successfully.' });
-      } else {
-        res.json({ message: 'Already connected.' });
-      }
-    } else if (command === 'disconnect') {
-      if (isConnected && client) {
-        await client.quit();
-        isConnected = false;
-        res.json({ message: 'Disconnected from TS3 server successfully.' });
-      } else {
-        res.json({ message: 'Already disconnected.' });
-      }
-    } else {
-      res.status(400).json({ message: 'Unknown command.' });
-    }
-  } catch (error) {
-    logger.error(`Error handling command: ${error.message}`, { stack: error.stack });
-    res.status(500).json({ message: 'Failed to handle command.', error: error.message });
-  }
-});
+app.post('/command', authenticate, botController.sendCommand);
 
 // Start the Bot API Server
-app.listen(BOT_API_PORT, () => {
+app.listen(BOT_API_PORT, async () => {
   logger.info(`Bot API server is running on port ${BOT_API_PORT}`);
-  initializeClient(); // Initialize the TS3 client when the server starts
+  try {
+    await botController.initializeClient(); // Initialize the TS3 client when the server starts
+  } catch (error) {
+    logger.error(`Failed to initialize TS3 client: ${error.message}`);
+  }
 });
 
 // Graceful Shutdown
 const shutdown = async () => {
   logger.info('Shutting down TS3 Bot...');
-  if (isConnected && client) {
-    await client.quit();
+  if (botController.client && botController.client.connected) {
+    await botController.client.quit();
     logger.info('Bot disconnected successfully.');
   }
   process.exit(0);

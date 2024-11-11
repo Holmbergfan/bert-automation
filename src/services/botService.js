@@ -3,6 +3,11 @@ let client;
 let isConnected = false;
 
 exports.initializeClient = async () => {
+  if (isConnected) {
+    console.log('TS3 Client is already connected.');
+    return 'Already connected.';
+  }
+
   try {
     client = await TeamSpeak.connect({
       host: process.env.TS3_HOST,

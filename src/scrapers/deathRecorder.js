@@ -100,7 +100,13 @@ const parseTimestamp = (timestampStr) => {
 
   if (!day || !month || !year || !hours || !minutes || !seconds) return null;
 
-  return new Date(`${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`);
+  const date = new Date(`${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`);
+  if (isNaN(date.getTime())) {
+    logger.warn(`Invalid Date object created from timestamp: ${timestampStr}`);
+    return null;
+  }
+
+  return date;
 };
 
 // Helper function to parse death description HTML

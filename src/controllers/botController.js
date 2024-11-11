@@ -1,65 +1,100 @@
-const { TeamSpeak } = require('ts3-nodejs-library');
+const { TeamSpeak } = require('ts3-nodejs-library'); // Import only TeamSpeak
 const TS3Credentials = require('../models/ts3Credentials'); // Adjust the path as necessary
+const logger = require('../utils/logger'); // Ensure logger is imported
 
 let client;
 
 const initializeClient = async () => {
-  const credentials = await TS3Credentials.findById('ts3_credentials');
-  if (!credentials) {
-    throw new Error('TS3 credentials not found in the database');
+  if (client && client.connected) {
+    logger.info('TS3 Client is already connected.');
+    return; // Avoid re-initializing if already connected
   }
 
-  client = await TeamSpeak.connect({
-    host: credentials.host,
-    queryport: credentials.port,
-    username: credentials.username,
-    password: credentials.password,
-    nickname: credentials.nickname,
-    serverport: 9987,
-    serverid: credentials.serverId,
-  });
+  try {
+    const credentials = await TS3Credentials.findById('ts3_credentials');
+    if (!credentials) {
+      throw new Error('TS3 credentials not found in the database');
+    }
 
-  // Register for private text messages
-  await client.executeCommand("servernotifyregister", {
-    event: "textprivate"
-  });
+    logger.info('Connecting to TS3 server with the following credentials:', {
+      host: credentials.host,
+      queryport: credentials.port,
+      username: credentials.username,
+      // Do not log password for security reasons
+      nickname: credentials.nickname,
+      serverport: 9987,
+      serverid: credentials.serverId,
+    });
 
-// Listening for text messages
-client.on("textmessage", async (event) => {
-  console.log(`Message received from ${event.invoker.nickname}: ${event.msg}`);
+    client = await TeamSpeak.connect({
+      host: credentials.host,
+      queryport: credentials.port,
+      username: credentials.username,
+      password: credentials.password,
+      nickname: credentials.nickname,
+      serverport: 9987,
+      serverid: credentials.serverId,
+    });
 
-  // Handle commands like !command
-  if (event.msg.startsWith("!")) {
-    const command = event.msg.substring(1).toLowerCase(); // Get command without "!"
-    await handleCommand(command, event.invoker);
+    logger.info('Connected to TS3 server successfully.');
+
+    // Corrected logger statement without the extra parenthesis
+    logger.info('Creating temporary channel with parameters:', {
+      channelName: "Bert The Bot Is connected to the TS3 server and listen to textcommands",
+      channelFlagPermanent: false,
+      channelCodecQuality: 10,
+      channelCodec: 0, // Ensure this is a numerical value
+    });
+
+    // Corrected channel creation with camelCase parameters
+    await client.channelCreate({
+      channelName: "Bert The Bot Is connected to the TS3 server and listen to textcommands",
+      channelFlagPermanent: false,
+      channelCodecQuality: 10,
+      channelCodec: 0, // Use numerical value as per library requirements
+    });
+
+    // Register for private text messages
+    await client.registerEvent("textprivate");
+
+    // Listening for text messages
+    client.on("textmessage", async (event) => {
+      console.log(`Message received from ${event.invoker.nickname}: ${event.msg}`);
+
+      // Handle commands like !command
+      if (event.msg.startsWith("!")) {
+        const command = event.msg.substring(1).toLowerCase(); // Get command without "!"
+        await handleCommand(command, event.invoker);
+      }
+    });
+
+    client.on('close', () => {
+      logger.warn('TS3 Client disconnected.');
+    });
+
+    client.on('error', (error) => {
+      logger.error(`TS3 Client Error: ${error.message}`);
+    });
+  } catch (error) {
+    logger.error(`Error initializing TS3 Client: ${error.message}`);
   }
-});
-
-  client.on('close', () => {
-    console.warn('TS3 Client disconnected.');
-  });
-
-  client.on('error', (error) => {
-    console.error(`TS3 Client Error: ${error.message}`);
-  });
 };
 
 const handleCommand = async (command, invoker) => {
   switch (command) {
     case "ping":
-      await client.sendTextMessage(invoker.clid, TeamSpeak.TextMessageTargetMode.CLIENT, "Pong!");
+      await client.sendTextMessage(invoker.clid, 4, "Pong!"); // Use numerical mode
       break;
 
     case "help":
-      await client.sendTextMessage(invoker.clid, TeamSpeak.TextMessageTargetMode.CLIENT, "Available commands: !ping, !help");
+      await client.sendTextMessage(invoker.clid, 4, "Available commands: !ping, !help"); // Use numerical mode
       break;
 
     // Add more cases here for different commands
     default:
-      await client.sendTextMessage(invoker.clid, TeamSpeak.TextMessageTargetMode.CLIENT, `Unknown command: ${command}`);
+      await client.sendTextMessage(invoker.clid, 4, `Unknown command: ${command}`); // Use numerical mode
   }
 };
-
 
 const kickUser = async (req, res) => {
   try {
@@ -68,7 +103,7 @@ const kickUser = async (req, res) => {
     }
 
     const { userId } = req.body;
-    await client.kickClient(userId, TeamSpeak.Client.KickReason.channel, "Kicked by bot");
+    await client.kickClient(userId, 'CHANNEL', "Kicked by bot"); // Replace enumeration with string
     res.json({ message: `User with ID ${userId} kicked successfully.` });
   } catch (error) {
     console.error(`Error kicking user: ${error.message}`);
@@ -78,10 +113,6 @@ const kickUser = async (req, res) => {
 
 const getStatus = async (req, res) => {
   try {
-    if (!client) {
-      await initializeClient();
-    }
-
     const status = client ? 'online' : 'offline';
     res.json({ status });
   } catch (error) {
@@ -92,10 +123,6 @@ const getStatus = async (req, res) => {
 
 const sendCommand = async (req, res) => {
   try {
-    if (!client) {
-      await initializeClient();
-    }
-
     const { command } = req.body;
     // Implement command handling logic here
     res.json({ message: `Command ${command} sent successfully.` });
@@ -107,10 +134,6 @@ const sendCommand = async (req, res) => {
 
 const getPlayerInfo = async (req, res) => {
   try {
-    if (!client) {
-      await initializeClient();
-    }
-
     const { name } = req.params;
     // Implement player info fetching logic here
     res.json({ player: { name, info: 'Player info' } });
@@ -122,10 +145,6 @@ const getPlayerInfo = async (req, res) => {
 
 const playerLogin = async (req, res) => {
   try {
-    if (!client) {
-      await initializeClient();
-    }
-
     const { playerId } = req.body;
     // Implement player login handling logic here
     res.json({ message: `Player with ID ${playerId} logged in successfully.` });
@@ -193,19 +212,12 @@ const updateSettings = async (req, res) => {
 };
 
 module.exports = {
-  updateSettings,
-  // ... other exports
-};
-
-
-
-module.exports = {
   kickUser,
   getStatus,
   sendCommand,
   getPlayerInfo,
   assignServerAdmin,
   playerLogin,
-  updateSettings, // Make sure to export this new function
+  updateSettings,
   initializeClient,
 };

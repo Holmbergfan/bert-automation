@@ -359,3 +359,5 @@
 {"level":"info","message":"Connected to TS3 server successfully.","timestamp":"2024-11-01T03:57:01.380Z"}
 {"level":"error","message":"TS3 Client Error: read ECONNRESET","timestamp":"2024-11-01T07:15:41.744Z"}
 {"level":"warn","message":"TS3 Client disconnected.","timestamp":"2024-11-01T07:15:41.749Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T02:46:16.941Z"}
+{"level":"error","message":"Error initializing TS3 Client: Operation `ts3_credentials.findOne()` buffering timed out after 10000ms","timestamp":"2024-11-11T02:46:26.952Z"}

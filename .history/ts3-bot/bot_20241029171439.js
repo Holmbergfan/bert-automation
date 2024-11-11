@@ -1,23 +1,30 @@
-require('dotenv').config({ path: './.env' }); // This explicitly points to the `.env` file in the project root directory
+// ts3-bot/bot.js
+
+require('dotenv').config({ path: '../.env' }); // Ensure this path is correct
 const express = require('express');
-const cors = require('cors'); // Import the cors middleware
+const cors = require('cors');
 const app = express();
 const { TeamSpeak } = require('ts3-nodejs-library');
-const logger = require('./utils/logger'); // Adjust the path as necessary
+const logger = require('./utils/logger'); // Adjust the path if necessary
 const mongoose = require('mongoose');
+const botController = require('../controllers/botController'); // Adjust the path if necessary
 
 const BOT_API_PORT = process.env.BOT_API_PORT || 3002;
-console.log('Current Directory:', process.cwd());
-console.log('MongoDB URI:', process.env.MONGODB_URI);
+const MONGODB_URI = process.env.MONGODB_URI; // Ensure this is defined in .env
+
+// Middleware
+app.use(cors());
+app.use(express.json());
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+mongoose.connect(MONGODB_URI, {
+  serverSelectionTimeoutMS: 30000,
 })
   .then(() => logger.info('Connected to MongoDB'))
-  .catch(err => logger.error('Error connecting to MongoDB:', err));
+  .catch(err => {
+    logger.error('Failed to connect to MongoDB:', err);
+    process.exit(1); // Exit if DB connection fails
+  });
 
 // Define the TS3 Credentials Schema
 const ts3CredentialsSchema = new mongoose.Schema({
@@ -32,10 +39,6 @@ const ts3CredentialsSchema = new mongoose.Schema({
 }, { collection: 'ts3_credentials' });
 
 const TS3Credentials = mongoose.model('TS3Credentials', ts3CredentialsSchema);
-
-// Middleware
-app.use(cors());
-app.use(express.json());
 
 // Authentication Middleware
 const authenticate = (req, res, next) => {
@@ -64,7 +67,7 @@ const initializeClient = async () => {
       username: credentials.username,
       password: credentials.password,
       nickname: credentials.nickname,
-      serverport: 9987,
+      serverport: 9987, // Default TS3 port; adjust if different
       serverid: credentials.serverId,
     });
 
@@ -77,14 +80,16 @@ const initializeClient = async () => {
     });
 
     client.on('error', (error) => {
+      isConnected = false;
       logger.error(`TS3 Client Error: ${error.message}`);
     });
   } catch (error) {
     logger.error(`Error initializing TS3 Client: ${error.message}`);
+    throw error; // Rethrow to let the caller handle it
   }
 };
 
-// Example endpoint to get bot status
+// Endpoint to get bot status
 app.get('/status', authenticate, async (req, res) => {
   try {
     logger.info('Received request for bot status');
@@ -93,7 +98,7 @@ app.get('/status', authenticate, async (req, res) => {
       const clients = await client.clientList();
       res.json({
         status: 'online',
-        channel: client.channel,
+        channel: client.channel || 'N/A', // Ensure client.channel is defined
         serverGroups: serverGroups.map(group => ({
           id: group.sgid,
           name: group.name,
@@ -134,6 +139,22 @@ app.get('/settings', authenticate, async (req, res) => {
   }
 });
 
+// Endpoint to update settings
+app.post('/settings', authenticate, async (req, res) => {
+  try {
+    const { host, port, username, password, nickname, serverId, channelId } = req.body;
+    const credentials = await TS3Credentials.findByIdAndUpdate(
+      'ts3_credentials',
+      { host, port, username, password, nickname, serverId, channelId },
+      { new: true, upsert: true }
+    );
+    res.json({ message: 'Settings updated successfully', credentials });
+  } catch (error) {
+    logger.error(`Error updating settings: ${error.message}`);
+    res.status(500).json({ message: 'Failed to update settings.', error: error.message });
+  }
+});
+
 // Endpoint to handle connect and disconnect commands
 app.post('/command', authenticate, async (req, res) => {
   const { command } = req.body;
@@ -162,6 +183,49 @@ app.post('/command', authenticate, async (req, res) => {
   }
 });
 
+// Endpoint to handle player login notifications (from scraper)
+app.post('/notify-login', authenticate, async (req, res) => {
+  const { playerName, notificationType } = req.body;
+
+  if (!playerName || !notificationType) {
+    return res.status(400).json({ message: 'Player name and notification type are required.' });
+  }
+
+  try {
+    // Determine the message based on notification type
+    let message;
+    if (notificationType === 'warning') {
+      message = `⚠️ **WARNING:** Player **${playerName}** has just logged in!`;
+    } else if (notificationType === 'normal') {
+      message = `🎮 **${playerName}** has just logged in. Welcome!`;
+    } else {
+      return res.status(400).json({ message: 'Invalid notification type.' });
+    }
+
+    // Send the message to the global channel
+    await sendMessageToChannel(process.env.TS3_CHANNEL_ID, message);
+
+    res.json({ message: 'Notification sent successfully.' });
+  } catch (error) {
+    logger.error(`Error sending login notification for player ${playerName}: ${error.message}`);
+    res.status(500).json({ message: 'Failed to send login notification.', error: error.message });
+  }
+});
+
+// Function to send a message to a channel
+const sendMessageToChannel = async (channelId, message) => {
+  try {
+    if (isConnected && client) {
+      await client.sendTextMessage(channelId, 2, message); // 2 = channel message
+      logger.info(`Message sent to channel ${channelId}: "${message}"`);
+    } else {
+      logger.warn('Bot is offline. Cannot send message.');
+    }
+  } catch (error) {
+    logger.error(`Error sending message to channel ${channelId}: ${error.message}`);
+  }
+};
+
 // Start the Bot API Server
 app.listen(BOT_API_PORT, () => {
   logger.info(`Bot API server is running on port ${BOT_API_PORT}`);
@@ -177,6 +241,11 @@ const shutdown = async () => {
   }
   process.exit(0);
 };
+
+// Define your routes here
+router.post('/kick', botController.kickUser); // Make sure botController.kickUser is defined
+router.get('/status', botController.getStatus); // Make sure botController.getStatus is defined
+
 
 process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
