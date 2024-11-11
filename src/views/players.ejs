@@ -1,0 +1,118 @@
+<!-- src/views/players.ejs -->
+
+<div class="container-fluid mt-4">
+  <h1 class="mb-4">Players Management</h1>
+  <div class="row">
+    <!-- Sidebar for Adding Players -->
+    <div class="col-md-3">
+      <div class="card mb-3 shadow">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Add Player</h5>
+        </div>
+        <div class="card-body">
+          <form action="/add-player" method="POST">
+            <div class="mb-3">
+              <label for="name" class="form-label">Player Name:</label>
+              <input type="text" name="name" class="form-control" placeholder="Enter player name" required>
+            </div>
+            <div class="mb-3">
+              <label for="role" class="form-label">Role:</label>
+              <select name="role" class="form-select" required>
+                <option value="" selected disabled>Select Role</option>
+                <option value="friend">Friend</option>
+                <option value="enemy">Enemy</option>
+                <option value="neutral">Neutral</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="mainStatus" class="form-label">Main Status:</label>
+              <select name="mainStatus" class="form-select" required>
+                <option value="" selected disabled>Select Main Status</option>
+                <option value="Leader">Leader</option>
+                <option value="Sub-leader">Sub-leader</option>
+                <option value="Professional player">Professional Player</option>
+                <option value="Good player">Good Player</option>
+                <option value="Bad player">Bad Player</option>
+                <option value="Super noob">Super Noob</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="comment" class="form-label">Comment:</label>
+              <textarea name="comment" class="form-control" rows="2" placeholder="Add a comment (optional)"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Add Player</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Players List -->
+    <div class="col-md-9">
+      <div class="card shadow">
+        <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Tracked Players</h5>
+          <!-- Optional: Add a search bar or filters -->
+        </div>
+        <div class="card-body">
+          <% if (players.length === 0) { %>
+            <p class="text-center">No players are being tracked currently.</p>
+          <% } else { %>
+            <div class="table-responsive">
+              <table class="table table-hover table-striped">
+                <thead class="table-dark">
+                  <tr>
+                    <th>Name</th>
+                    <th>Level</th>
+                    <th>Vocation</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% players.forEach(player => { %>
+                    <tr data-bs-toggle="collapse" data-bs-target="#details-<%= player._id %>" aria-expanded="false" aria-controls="details-<%= player._id %>" style="cursor: pointer;">
+                      <td><%= player.name %></td>
+                      <td><%= player.level %></td>
+                      <td><%= player.profession %></td>
+                      <td>
+                        <% if (player.status === 'online') { %>
+                          <span class="badge bg-success">Online</span>
+                        <% } else { %>
+                          <span class="badge bg-secondary">Offline</span>
+                        <% } %>
+                      </td>
+
+                      <td>
+                        <form action="/remove-player" method="POST" onsubmit="return confirm('Are you sure you want to remove <%= player.name %>?');">
+                          <input type="hidden" name="name" value="<%= player.name %>">
+                          <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                        </form>
+                      </td>
+                    </tr>
+                    <!-- Collapsible Details Row -->
+                    <tr class="collapse" id="details-<%= player._id %>">
+                      <td colspan="5">
+                        <div class="card card-body">
+                          <h6>Detailed Information:</h6>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Role:</strong> <%= player.role %></li>
+                            <li class="list-group-item"><strong>Main Status:</strong> <%= player.mainStatus %></li>
+                            <li class="list-group-item"><strong>Comment:</strong> <%= player.comment %></li>
+                            <li class="list-group-item"><strong>City of Residence:</strong> <%= player.city || 'N/A' %></li>
+                            <li class="list-group-item"><strong>Deaths from Teammates:</strong> <%= player.deathsFromTeammates || 0 %></li>
+                            <li class="list-group-item"><strong>Kills to Teammates:</strong> <%= player.killsToTeammates || 0 %></li>
+                            <!-- Add more detailed info as needed -->
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,138 @@
+/* src/public/css/styles.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+  }
+  
+  /* Sidebar Styles */
+  #wrapper {
+    display: flex;
+    align-items: stretch;
+  }
+  
+  #sidebar-wrapper {
+    position: fixed;  /* Fix the sidebar */
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh;  /* Full viewport height */
+    background-color: #343a40;
+    color: white;
+    overflow-y: auto;  /* Enable sidebar scrolling if needed */
+  }
+  
+  /* Page Content Wrapper */
+  #page-content-wrapper {
+    margin-left: 250px;  /* Space for the fixed sidebar */
+    overflow-y: auto;
+    height: 100vh;
+    padding: 20px;
+  }
+  
+  #sidebar-wrapper .sidebar-heading {
+    font-size: 1.2rem;
+  }
+  
+  #sidebar-wrapper .list-group-item {
+    background-color: #343a40;
+    color: white;
+    border: none;
+  }
+  
+  #sidebar-wrapper .list-group-item:hover {
+    background-color: #495057;
+  }
+  
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -250px;
+  }
+  
+  /* Right Sidebar */
+  .right-sidebar {
+    background-color: #ffffff;
+    padding: 15px;
+    border-left: 1px solid #dee2e6;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+  }
+  
+  /* Card Headers */
+  .card-header h5 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  
+  /* Table Rows */
+  .table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+  
+  /* Badges */
+  .badge-success {
+    background-color: #28a745 !important;
+  }
+  
+  .badge-danger {
+    background-color: #dc3545 !important;
+  }
+  
+  .badge-secondary {
+    background-color: #6c757d !important;
+  }
+  
+  .badge-primary {
+    background-color: #007bff !important;
+  }
+  
+  .badge-warning {
+    background-color: #ffc107 !important;
+  }
+  
+  .badge-info {
+    background-color: #17a2b8 !important;
+  }
+  
+  .badge-light {
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
+  }
+  
+  .badge-dark {
+    background-color: #343a40 !important;
+  }
+  
+  /* Shadows for Cards */
+  .card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+  
+  /* Compact Headers */
+  .card-header {
+    padding: 0.75rem 1.25rem;
+  }
+  
+  /* Toggle Menu Button */
+  #menu-toggle {
+    margin-right: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    #sidebar-wrapper {
+      position: absolute;
+      margin-left: -250px;
+      z-index: 1;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+      margin-left: 0;
+    }
+    #page-content-wrapper {
+      margin-left: 0;
+    }
+  }
+  
+  

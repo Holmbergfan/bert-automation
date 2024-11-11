@@ -1,0 +1,324 @@
+<!-- src/views/dashboard.ejs -->
+
+<!-- Statistics Cards -->
+<div class="row">
+  <div class="col-md-4 mb-3">
+    <div class="card text-center shadow">
+      <div class="card-header bg-primary text-white">
+        Tracked Players
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= totalTrackedPlayers %></h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card text-center shadow">
+      <div class="card-header bg-warning text-dark">
+        High Level Spawns Free
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= highLevelSpawnsFree %></h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card text-center shadow">
+      <div class="card-header bg-info text-white">
+        Mid Level Spawns Free
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= midLevelSpawnsFree %></h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card text-center shadow">
+      <div class="card-header bg-success text-white">
+        Low Level Spawns Free
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= lowLevelSpawnsFree %></h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card text-center shadow">
+      <div class="card-header bg-info text-white">
+        Total Kills
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= totalKills %></h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card text-center shadow">
+      <div class="card-header bg-danger text-white">
+        Total Commands from Users
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= totalCommandsFromUsers %></h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card text-center shadow">
+      <div class="card-header bg-secondary text-white">
+        Total Commands from Bot
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= totalCommandsFromBot %></h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card text-center shadow">
+      <div class="card-header bg-dark text-white">
+        Users Online on TS3
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= usersOnlineTS3 %></h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card text-center shadow">
+      <div class="card-header bg-light text-dark">
+        Users AFK on TS3
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= usersAfkTS3 %></h5>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Power Gamers Sections -->
+  <!-- Enemies Power Gamers -->
+  <div class="col-md-6 mb-3">
+    <div class="card rounded shadow">
+      <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Top Enemies Power Gamers</h5>
+      </div>
+      <div class="card-body">
+        <% if (enemiesPowerGamers.length > 0) { %>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th>Name</th>
+                  <th>Level</th>
+                  <th>Profession</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% enemiesPowerGamers.forEach(player => { %>
+                  <tr>
+                    <td>
+                      <a href="/players/<%= encodeURIComponent(player.name) %>"><%= player.name %></a>
+                    </td>
+                    <td><%= player.level %></td>
+                    <td><%= player.profession %></td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        <% } else { %>
+          <p>No enemies power gamers tracked.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Friends Power Gamers -->
+  <div class="col-md-6 mb-3">
+    <div class="card rounded shadow">
+      <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Top Friends Power Gamers</h5>
+      </div>
+      <div class="card-body">
+        <% if (friendsPowerGamers.length > 0) { %>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th>Name</th>
+                  <th>Level</th>
+                  <th>Profession</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% friendsPowerGamers.forEach(player => { %>
+                  <tr>
+                    <td>
+                      <a href="/players/<%= encodeURIComponent(player.name) %>"><%= player.name %></a>
+                    </td>
+                    <td><%= player.level %></td>
+                    <td><%= player.profession %></td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        <% } else { %>
+          <p>No friends power gamers tracked.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Neutrals Power Gamers -->
+  <div class="col-md-6 mb-3">
+    <div class="card rounded shadow">
+      <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Top Neutrals Power Gamers</h5>
+      </div>
+      <div class="card-body">
+        <% if (neutralsPowerGamers.length > 0) { %>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th>Name</th>
+                  <th>Level</th>
+                  <th>Profession</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% neutralsPowerGamers.forEach(player => { %>
+                  <tr>
+                    <td>
+                      <a href="/players/<%= encodeURIComponent(player.name) %>"><%= player.name %></a>
+                    </td>
+                    <td><%= player.level %></td>
+                    <td><%= player.profession %></td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        <% } else { %>
+          <p>No neutrals power gamers tracked.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Neutrals Deaths -->
+  <div class="col-md-6 mb-3">
+    <div class="card rounded shadow">
+      <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Latest Neutrals Deaths</h5>
+      </div>
+      <div class="card-body">
+        <% if (neutralsDeaths.length > 0) { %>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th>Victim</th>
+                  <th>Killer</th>
+                  <th>Level</th>
+                  <th>Reason</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% neutralsDeaths.forEach(death => { %>
+                  <tr>
+                    <td><%= death.victim %></td>
+                    <td><%= death.killer %></td>
+                    <td><%= death.victimLevel %></td>
+                    <td><%= death.reason || 'N/A' %></td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        <% } else { %>
+          <p>No recent neutrals deaths recorded.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enemies Deaths -->
+  <div class="col-md-6 mb-3">
+    <div class="card rounded shadow">
+      <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Latest Enemies Deaths</h5>
+      </div>
+      <div class="card-body">
+        <% if (enemiesDeaths.length > 0) { %>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th>Victim</th>
+                  <th>Killer</th>
+                  <th>Level</th>
+                  <th>Reason</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% enemiesDeaths.forEach(death => { %>
+                  <tr>
+                    <td><%= death.victim %></td>
+                    <td><%= death.killer %></td>
+                    <td><%= death.victimLevel %></td>
+                    <td><%= death.reason || 'N/A' %></td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        <% } else { %>
+          <p>No recent enemies deaths recorded.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Friends Deaths -->
+  <div class="col-md-6 mb-3">
+    <div class="card rounded shadow">
+      <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Latest Friends Deaths</h5>
+      </div>
+      <div class="card-body">
+        <% if (friendsDeaths.length > 0) { %>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th>Victim</th>
+                  <th>Killer</th>
+                  <th>Level</th>
+                  <th>Reason</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% friendsDeaths.forEach(death => { %>
+                  <tr>
+                    <td><%= death.victim %></td>
+                    <td><%= death.killer %></td>
+                    <td><%= death.victimLevel %></td>
+                    <td><%= death.reason || 'N/A' %></td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        <% } else { %>
+          <p>No recent friends deaths recorded.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+
+</div>

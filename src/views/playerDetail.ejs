@@ -1,0 +1,25 @@
+<!-- src/views/playerDetail.ejs -->
+
+<div class="row">
+    <div class="col-12">
+      <h2><%= player.name %> - Details</h2>
+      <div class="card mb-4 rounded shadow">
+        <div class="card-body">
+          <p><strong>Level:</strong> <%= player.level %></p>
+          <p><strong>Profession:</strong> <%= player.profession %></p>
+          <p><strong>Status:</strong> <%= player.status %></p>
+          <p><strong>Role:</strong> <%= player.role %></p>
+          <p><strong>Main Status:</strong> <%= player.mainStatus %></p>
+          <p><strong>Comment:</strong> <%= player.comment || 'No comments' %></p>
+          <p><strong>Residence:</strong> <%= player.residence %></p>
+          <p><strong>Sex:</strong> <%= player.sex %></p>
+          <p><strong>Last Seen:</strong> <%= moment(player.lastSeen).format('MMMM Do YYYY, h:mm:ss a') %></p>
+          <p><strong>Last Updated:</strong> <%= moment(player.lastUpdated).format('MMMM Do YYYY, h:mm:ss a') %></p>
+          <p><strong>Last Login:</strong> <%= moment(player.lastLogin).format('MMMM Do YYYY, h:mm:ss a') %></p>
+          <!-- Add more player details as needed -->
+        </div>
+      </div>
+      <a href="/players" class="btn btn-secondary">Back to Players</a>
+    </div>
+  </div>
+  

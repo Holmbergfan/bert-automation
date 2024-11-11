@@ -1,0 +1,38 @@
+<!-- src/views/activities.ejs -->
+
+<% layout('layout') -%>
+
+<div class="container-fluid mt-4">
+  <h1 class="mb-4">All Activities</h1>
+  <div class="card shadow">
+    <div class="card-header bg-success text-white">
+      <h5 class="mb-0">Activity Log</h5>
+    </div>
+    <div class="card-body">
+      <% if (activities.length === 0) { %>
+        <p class="text-center">No activities recorded yet.</p>
+      <% } else { %>
+        <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th>Player Name</th>
+                <th>Description</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% activities.forEach(activity => { %>
+                <tr>
+                  <td><%= activity.playerName %></td>
+                  <td><%= activity.description %></td>
+                  <td><%= moment(activity.timestamp).format('YYYY-MM-DD HH:mm:ss') %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
