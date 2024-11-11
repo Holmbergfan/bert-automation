@@ -361,3 +361,7 @@
 {"level":"warn","message":"TS3 Client disconnected.","timestamp":"2024-11-01T07:15:41.749Z"}
 {"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T02:46:16.941Z"}
 {"level":"error","message":"Error initializing TS3 Client: Operation `ts3_credentials.findOne()` buffering timed out after 10000ms","timestamp":"2024-11-11T02:46:26.952Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T19:34:58.925Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T19:35:00.096Z"}
+{"level":"error","message":"Failed to initialize TS3 client: Client ID not received","timestamp":"2024-11-11T19:35:09.762Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T19:35:54.523Z"}

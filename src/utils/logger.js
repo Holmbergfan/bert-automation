@@ -4,11 +4,26 @@ const moment = require('moment');
 
 const logger = {
   info: (message) => {
-    console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] INFO: ${message}`);
+    console.log(JSON.stringify({
+      level: 'info',
+      message,
+      timestamp: new Date().toISOString()
+    }));
   },
-  error: (message) => {
-    console.error(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ERROR: ${message}`);
+  error: (message, error) => {
+    console.error(JSON.stringify({
+      level: 'error',
+      message: typeof error === 'object' ? `${message}: ${error.message}` : message,
+      timestamp: new Date().toISOString()
+    }));
   },
+  warn: (message) => {
+    console.warn(JSON.stringify({
+      level: 'warn',
+      message,
+      timestamp: new Date().toISOString()
+    }));
+  }
 };
 
 module.exports = logger;

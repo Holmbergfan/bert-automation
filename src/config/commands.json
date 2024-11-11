@@ -1,0 +1,35 @@
+{
+  "ping": {
+    "description": "Ping the bot",
+    "usage": "!ping",
+    "handler": "handlePing"
+  },
+  "help": {
+    "description": "Show help message",
+    "usage": "!help",
+    "handler": "handleHelp"
+  },
+  "masspoke": {
+    "description": "Poke all users with message",
+    "usage": "!masspoke [message]",
+    "example": "!masspoke Meeting in 5 minutes!",
+    "handler": "handleMassPoke"
+  },
+  "masskick": {
+    "description": "Kick all users",
+    "usage": "!masskick [reason]",
+    "example": "!masskick Server maintenance",
+    "handler": "handleMassKick"
+  },
+  "massmove": {
+    "description": "Move all users to channel",
+    "usage": "!massmove [channel]",
+    "example": "!massmove Lobby",
+    "handler": "handleMassMove"
+  },
+  "join": {
+    "description": "Make the bot join your current channel",
+    "usage": "!join",
+    "handler": "handleJoin"
+  }
+}

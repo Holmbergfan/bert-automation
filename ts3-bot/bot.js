@@ -14,11 +14,8 @@ console.log('Current Directory:', process.cwd());
 console.log('MongoDB URI:', process.env.MONGODB_URI);
 
 const cors = require('cors');
-app.use(cors({
-  origin: 'http://localhost:3000', // Replace with the correct frontend URL
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-}));
+const config = require('../src/config/config');
+app.use(cors(config.server.cors));
 
 // Middleware
 app.use(express.json());
@@ -27,13 +24,11 @@ app.use('/bot', botRoutes); // Use the bot routes
 // Use process.env.MONGODB_URI to get the URI
 const MONGODB_URI = process.env.MONGODB_URI;
 
-mongoose.connect(MONGODB_URI, {
-  serverSelectionTimeoutMS: 30000,
-})
-  .then(() => console.log('Connected to MongoDB'))
+mongoose.connect(config.mongodb.uri, config.mongodb.options)
+  .then(() => logger.info('Connected to MongoDB'))
   .catch(err => {
-    console.error('Failed to connect to MongoDB:', err.message);
-    process.exit(1); // Exit the process if we can't connect to MongoDB
+    logger.error('Failed to connect to MongoDB:', err.message);
+    process.exit(1);
   });
 
 // Define the TS3 Credentials Schema
@@ -82,23 +77,17 @@ const authenticate = (req, res, next) => {
 
 const botController = require('../src/controllers/botController');
 
-// Example endpoint to get bot status
-app.get('/status', authenticate, botController.getStatus);
-
-// Endpoint to fetch current settings
-app.get('/bot/settings', authenticate, botController.updateSettings);
-
-// Endpoint to update settings
-app.post('/bot/settings', authenticate, botController.updateSettings);
-
-// Endpoint to handle connect and disconnect commands
-app.post('/command', authenticate, botController.sendCommand);
-
 // Start the Bot API Server
 app.listen(BOT_API_PORT, async () => {
   logger.info(`Bot API server is running on port ${BOT_API_PORT}`);
   try {
-    await botController.initializeClient(); // Initialize the TS3 client when the server starts
+    // Fetch TS3 settings before initializing
+    const settings = await TS3Credentials.findOne();
+    if (settings) {
+      await botController.initializeClient(settings);
+    } else {
+      logger.warn('No TS3 settings found in database');
+    }
   } catch (error) {
     logger.error(`Failed to initialize TS3 client: ${error.message}`);
   }
