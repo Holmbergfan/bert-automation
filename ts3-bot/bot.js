@@ -1,107 +1,80 @@
-const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../.env') });
-console.log('Current Directory:', process.cwd());
-console.log('MongoDB URI:', process.env.MONGODB_URI);
 const express = require('express');
-const app = express();
-const { TeamSpeak } = require('ts3-nodejs-library');
-const logger = require('./utils/logger'); // Adjust the path as necessary
 const mongoose = require('mongoose');
-const botRoutes = require('../src/routes/bot');
-const BOT_API_PORT = process.env.BOT_API_PORT || 3002;
-
-console.log('Current Directory:', process.cwd());
-console.log('MongoDB URI:', process.env.MONGODB_URI);
-
 const cors = require('cors');
-const config = require('../src/config/config');
-app.use(cors(config.server.cors));
+const logger = require('./utils/logger');
+const botController = require('./controllers/botController');
 
-// Middleware
+require('dotenv').config();
+
+const app = express();
+const PORT = process.env.BOT_API_PORT || 3002;
+
+// Basic middleware
 app.use(express.json());
-app.use('/bot', botRoutes); // Use the bot routes
+app.use(cors());
 
-// Use process.env.MONGODB_URI to get the URI
-const MONGODB_URI = process.env.MONGODB_URI;
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
 
-mongoose.connect(config.mongodb.uri, config.mongodb.options)
-  .then(() => logger.info('Connected to MongoDB'))
-  .catch(err => {
-    logger.error('Failed to connect to MongoDB:', err.message);
-    process.exit(1);
-  });
-
-// Define the TS3 Credentials Schema
-const ts3CredentialsSchema = new mongoose.Schema({
-  _id: String,
-  host: String,
-  port: Number,
-  username: String,
-  password: String,
-  nickname: String,
-  serverId: Number,
-  channelId: Number
-}, { collection: 'ts3_credentials' });
-
-let TS3Credentials;
-try {
-  TS3Credentials = mongoose.model('TS3Credentials');
-} catch (error) {
-  if (error.name === 'MissingSchemaError') {
-    const ts3CredentialsSchema = new mongoose.Schema({
-      _id: String,
-      host: String,
-      port: Number,
-      username: String,
-      password: String,
-      nickname: String,
-      serverId: Number,
-      channelId: Number,
-    }, { collection: 'ts3_credentials' });
-
-    TS3Credentials = mongoose.model('TS3Credentials', ts3CredentialsSchema);
-  } else {
-    throw error;
-  }
-}
-
-// Authentication Middleware
-const authenticate = (req, res, next) => {
-  const apiKey = req.headers['x-api-key'];
-  if (apiKey && apiKey === process.env.BOT_API_KEY) {
-    next();
-  } else {
-    res.status(401).json({ message: 'Unauthorized' });
-  }
-};
-
-const botController = require('../src/controllers/botController');
-
-// Start the Bot API Server
-app.listen(BOT_API_PORT, async () => {
-  logger.info(`Bot API server is running on port ${BOT_API_PORT}`);
+// Bot endpoints
+app.get('/status', async (req, res) => {
   try {
-    // Fetch TS3 settings before initializing
-    const settings = await TS3Credentials.findOne();
-    if (settings) {
-      await botController.initializeClient(settings);
-    } else {
-      logger.warn('No TS3 settings found in database');
-    }
+    const status = await botController.getStatus(req, res);
+    res.json(status);
   } catch (error) {
-    logger.error(`Failed to initialize TS3 client: ${error.message}`);
+    logger.error('Error getting bot status:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-// Graceful Shutdown
-const shutdown = async () => {
-  logger.info('Shutting down TS3 Bot...');
-  if (botController.client && botController.client.connected) {
-    await botController.client.quit();
-    logger.info('Bot disconnected successfully.');
+app.post('/command', async (req, res) => {
+  try {
+    const { command } = req.body;
+    // Add command handling here
+    res.json({ success: true, message: `Command ${command} received` });
+  } catch (error) {
+    logger.error('Error processing command:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
-  process.exit(0);
+});
+
+// Initialize bot and start server
+const start = async () => {
+  try {
+    // Connect to MongoDB with updated options
+    await mongoose.connect(process.env.MONGODB_URI);
+    logger.info('Connected to MongoDB');
+    
+    // Initialize bot first
+    const initialized = await botController.initializeSettings();
+    if (!initialized) {
+      throw new Error('Bot initialization failed - check database settings');
+    }
+    
+    // Start express server
+    app.listen(PORT, () => {
+      logger.info('Bot server running on port', { port: PORT });
+    });
+  } catch (error) {
+    logger.error('Application startup failed', { 
+      error: error.message,
+      context: error.context || 'startup'
+    });
+    process.exit(1);
+  }
 };
 
-process.on('SIGINT', shutdown);
-process.on('SIGTERM', shutdown);
+// Handle graceful shutdown
+process.on('SIGTERM', () => {
+  logger.info('SIGTERM received. Starting graceful shutdown...');
+  botController.safeDisconnect()
+    .then(() => process.exit(0))
+    .catch((error) => {
+      logger.error('Error during shutdown:', error);
+      process.exit(1);
+    });
+});
+
+start();

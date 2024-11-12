@@ -756,3 +756,203 @@
 {"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T19:49:45.466Z"}
 {"level":"error","message":"Failed to initialize TS3 client: Client ID not received","timestamp":"2024-11-11T19:49:55.601Z"}
 {"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T20:04:29.118Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T20:09:31.730Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T20:09:32.716Z"}
+{"level":"error","message":"Failed to initialize TS3 client: Client ID not received","timestamp":"2024-11-11T20:09:41.921Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T20:22:45.985Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T20:22:48.452Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T20:22:49.679Z"}
+{"level":"error","message":"Failed to initialize TS3 client: Client ID not received","timestamp":"2024-11-11T20:22:59.370Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T20:33:10.583Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T20:33:13.001Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T20:33:13.911Z"}
+{"level":"error","message":"Failed to initialize TS3 client: Client ID not received","timestamp":"2024-11-11T20:33:23.179Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T20:42:11.436Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T20:42:19.545Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T20:42:20.907Z"}
+{"level":"error","message":"Failed to initialize TS3 client: connection failed, you are banned, you may retry in 597 seconds","timestamp":"2024-11-11T20:42:27.853Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T20:43:58.318Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T20:47:31.860Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T20:47:33.428Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T20:47:34.985Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T21:01:36.921Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T21:01:38.616Z"}
+{"level":"error","message":"Failed to initialize TS3 client: invalid loginname or password","timestamp":"2024-11-11T21:01:39.482Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T21:01:48.342Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T21:06:43.166Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T21:06:44.570Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T21:33:24.026Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T21:33:29.387Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T21:33:30.456Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T21:34:15.330Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T21:34:27.763Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T21:34:28.607Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T21:45:09.381Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T21:48:11.164Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T21:48:12.117Z"}
+{"level":"error","message":"Failed to initialize TS3 client: invalid serverID","timestamp":"2024-11-11T21:48:13.289Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T21:48:47.949Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T21:50:44.717Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T21:50:45.679Z"}
+{"level":"error","message":"Failed to initialize TS3 client: invalid serverID","timestamp":"2024-11-11T21:50:46.607Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T21:54:09.205Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T21:54:11.738Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T21:54:12.724Z"}
+{"level":"error","message":"Failed to initialize TS3 client: queryClient.use is not a function","timestamp":"2024-11-11T21:54:13.648Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T22:02:03.189Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T22:02:11.328Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:02:12.377Z"}
+{"level":"warn","message":"No TS3 settings found in database","timestamp":"2024-11-11T22:02:12.761Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T22:06:50.355Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T22:09:39.692Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:09:40.576Z"}
+{"level":"warn","message":"No TS3 settings found in database","timestamp":"2024-11-11T22:09:40.661Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T22:10:08.946Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T22:10:11.506Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:10:12.228Z"}
+{"level":"warn","message":"No TS3 settings found in database","timestamp":"2024-11-11T22:10:12.307Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T22:10:54.467Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T22:10:56.272Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:10:57.101Z"}
+{"level":"warn","message":"No TS3 settings found in database","timestamp":"2024-11-11T22:10:57.171Z"}
+{"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T22:14:06.010Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:14:33.224Z"}
+{"_message":"TS3Credentials validation failed","errors":{"_id":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"ts3_credentials\" (type string) at path \"_id\" because of \"BSONError\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"ts3_credentials\"","value":"ts3_credentials","valueType":"string"}},"level":"error","message":"Error initializing credentials: TS3Credentials validation failed: _id: Cast to ObjectId failed for value \"ts3_credentials\" (type string) at path \"_id\" because of \"BSONError\"","stack":"ValidationError: TS3Credentials validation failed: _id: Cast to ObjectId failed for value \"ts3_credentials\" (type string) at path \"_id\" because of \"BSONError\"\n    at Document.invalidate (C:\\Users\\holmb\\Webapp project\\bert-automation\\node_modules\\mongoose\\lib\\document.js:3318:32)\n    at model.$set (C:\\Users\\holmb\\Webapp project\\bert-automation\\node_modules\\mongoose\\lib\\document.js:1474:12)\n    at model.$set (C:\\Users\\holmb\\Webapp project\\bert-automation\\node_modules\\mongoose\\lib\\document.js:1128:16)\n    at model.Document (C:\\Users\\holmb\\Webapp project\\bert-automation\\node_modules\\mongoose\\lib\\document.js:177:12)\n    at model.Model (C:\\Users\\holmb\\Webapp project\\bert-automation\\node_modules\\mongoose\\lib\\model.js:125:12)\n    at new model (C:\\Users\\holmb\\Webapp project\\bert-automation\\node_modules\\mongoose\\lib\\model.js:4611:15)\n    at initializeCredentials (C:\\Users\\holmb\\Webapp project\\bert-automation\\ts3-bot\\bot.js:152:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async startServer (C:\\Users\\holmb\\Webapp project\\bert-automation\\ts3-bot\\bot.js:179:5)","timestamp":"2024-11-11T22:14:33.753Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:23:27.135Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:28:35.627Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:29:45.054Z"}
+{"level":"info","message":"Default TS3 credentials initialized","timestamp":"2024-11-11T22:29:45.817Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T22:29:45.821Z"}
+{"level":"info","message":"Received SIGINT. Shutting down...","timestamp":"2024-11-11T22:29:52.701Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:31:03.175Z"}
+{"level":"info","message":"Existing TS3 credentials found","timestamp":"2024-11-11T22:31:03.613Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T22:31:03.616Z"}
+{"level":"error","message":"Server startup failed: Failed to connect after 3 attempts","timestamp":"2024-11-11T22:31:16.279Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:33:54.690Z"}
+{"level":"info","message":"Existing TS3 credentials found","timestamp":"2024-11-11T22:33:55.278Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T22:33:55.282Z"}
+{"level":"error","message":"Server startup failed: Failed to connect after 1 attempts","timestamp":"2024-11-11T22:33:57.615Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:38:28.129Z"}
+{"level":"info","message":"Existing TS3 credentials found","timestamp":"2024-11-11T22:38:28.621Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T22:38:28.624Z"}
+{"level":"error","message":"Server startup failed: Failed to connect after 3 attempts","timestamp":"2024-11-11T22:38:34.601Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:41:48.602Z"}
+{"level":"info","message":"Existing TS3 credentials found","timestamp":"2024-11-11T22:41:49.043Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T22:41:49.050Z"}
+{"level":"error","message":"Server startup failed: Failed to connect after 3 attempts","timestamp":"2024-11-11T22:42:03.292Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:43:36.370Z"}
+{"level":"info","message":"Existing TS3 credentials found","timestamp":"2024-11-11T22:43:36.856Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T22:43:36.860Z"}
+{"level":"error","message":"Server startup failed: Failed to connect after 2 attempts","timestamp":"2024-11-11T22:43:40.056Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:48:32.879Z"}
+{"level":"info","message":"Existing TS3 credentials found","timestamp":"2024-11-11T22:48:33.365Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T22:48:33.368Z"}
+{"fatal":true,"level":"error","message":"Uncaught Exception: Connection lost before handshake","stack":"Error: Connection lost before handshake\n    at makeError (C:\\Users\\holmb\\Webapp project\\bert-automation\\node_modules\\ssh2\\lib\\protocol\\utils.js:142:15)\n    at C:\\Users\\holmb\\Webapp project\\bert-automation\\node_modules\\ssh2\\lib\\client.js:753:13\n    at Socket.<anonymous> (C:\\Users\\holmb\\Webapp project\\bert-automation\\node_modules\\ssh2\\lib\\client.js:808:7)\n    at Socket.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)","timestamp":"2024-11-11T22:48:34.159Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:50:47.387Z"}
+{"level":"info","message":"Existing TS3 credentials found","timestamp":"2024-11-11T22:50:47.837Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T22:50:47.842Z"}
+{"level":"info","message":"Received SIGINT. Shutting down...","timestamp":"2024-11-11T22:58:17.923Z"}
+{"level":"info","message":"Received SIGINT. Initiating graceful shutdown...","timestamp":"2024-11-11T22:58:17.924Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T22:58:21.985Z"}
+{"level":"info","message":"Existing TS3 credentials found","timestamp":"2024-11-11T22:58:22.430Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T22:58:22.433Z"}
+{"level":"error","message":"Server startup failed: Failed to connect after 3 attempts","timestamp":"2024-11-11T22:58:36.179Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T23:05:51.677Z"}
+{"level":"info","message":"Existing TS3 credentials found","timestamp":"2024-11-11T23:05:52.193Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T23:05:52.198Z"}
+{"level":"error","message":"Server startup failed: Failed to connect after 3 attempts","timestamp":"2024-11-11T23:06:07.318Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T23:08:30.343Z"}
+{"level":"info","message":"Existing TS3 credentials found","timestamp":"2024-11-11T23:08:30.776Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T23:08:30.779Z"}
+{"level":"error","message":"Server startup failed: Failed to connect after 3 attempts","timestamp":"2024-11-11T23:08:46.036Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T23:41:52.739Z"}
+{"level":"info","message":"Existing TS3 credentials found","timestamp":"2024-11-11T23:41:53.235Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T23:41:53.239Z"}
+{"level":"info","message":"Received SIGINT. Shutting down...","timestamp":"2024-11-11T23:43:26.062Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T23:43:31.443Z"}
+{"level":"info","message":"Existing TS3 credentials found","timestamp":"2024-11-11T23:43:31.909Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T23:43:31.913Z"}
+{"level":"error","message":"Server startup failed: Failed to connect after 3 attempts","timestamp":"2024-11-11T23:43:45.177Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T23:58:03.166Z"}
+{"level":"info","message":"Existing TS3 credentials found","timestamp":"2024-11-11T23:58:03.627Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-11T23:58:03.630Z"}
+{"level":"error","message":"Server startup failed: Failed to connect after 3 attempts","timestamp":"2024-11-11T23:58:16.583Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T00:00:34.487Z"}
+{"level":"info","message":"Existing TS3 credentials found","timestamp":"2024-11-12T00:00:34.989Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-12T00:00:34.992Z"}
+{"level":"error","message":"Server startup failed: Failed to connect after 3 attempts","timestamp":"2024-11-12T00:00:48.019Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-12T00:11:01.446Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T00:11:02.488Z"}
+{"level":"warn","message":"No TeamSpeak settings found in the database","timestamp":"2024-11-12T00:11:15.875Z"}
+{"level":"info","message":"Received SIGINT. Starting graceful shutdown...","timestamp":"2024-11-12T00:11:22.740Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-12T01:01:44.976Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T01:01:45.825Z"}
+{"level":"warn","message":"No TeamSpeak settings found in the database","timestamp":"2024-11-12T01:01:59.161Z"}
+{"level":"error","message":"Error during bot initialization: Failed to connect after 3 attempts","timestamp":"2024-11-12T01:02:11.262Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-12T01:06:26.882Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T01:06:27.620Z"}
+{"level":"warn","message":"No TeamSpeak settings found in the database","timestamp":"2024-11-12T01:06:40.956Z"}
+{"level":"error","message":"Error during bot initialization: Failed to connect after 3 attempts","timestamp":"2024-11-12T01:06:53.058Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-12T01:07:00.325Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T01:07:01.320Z"}
+{"level":"warn","message":"No TeamSpeak settings found in the database","timestamp":"2024-11-12T01:07:14.883Z"}
+{"level":"error","message":"Error during bot initialization: Failed to connect after 3 attempts","timestamp":"2024-11-12T01:07:27.107Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-12T01:08:10.740Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T01:08:11.569Z"}
+{"level":"warn","message":"No TeamSpeak settings found in the database","timestamp":"2024-11-12T01:08:24.995Z"}
+{"level":"error","message":"Error during bot initialization: Failed to connect after 3 attempts","timestamp":"2024-11-12T01:08:37.076Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-12T02:42:19.562Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T02:42:24.983Z"}
+{"level":"info","message":"Received SIGINT. Starting graceful shutdown...","timestamp":"2024-11-12T02:42:32.033Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-12T02:59:58.900Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T02:59:59.762Z"}
+{"level":"warn","message":"No TeamSpeak settings found in the database","timestamp":"2024-11-12T03:00:00.211Z"}
+{"level":"error","message":"Error during bot initialization: validateSettings is not defined","timestamp":"2024-11-12T03:00:00.287Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T03:12:02.861Z"}
+{"level":"error","message":"Error initializing settings: validateSettings is not defined","timestamp":"2024-11-12T03:12:03.340Z"}
+{"level":"info","message":"Bot server running on port 3002","timestamp":"2024-11-12T03:12:03.343Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T03:13:33.773Z"}
+{"level":"error","message":"Failed to initialize TS3 client: invalid loginname or password","timestamp":"2024-11-12T03:13:34.859Z"}
+{"level":"error","message":"Error initializing settings: invalid loginname or password","timestamp":"2024-11-12T03:13:34.860Z"}
+{"level":"info","message":"Bot server running on port 3002","timestamp":"2024-11-12T03:13:34.863Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T03:14:23.276Z"}
+{"level":"error","message":"Failed to initialize TS3 client: invalid loginname or password","timestamp":"2024-11-12T03:14:24.316Z"}
+{"level":"error","message":"Error initializing settings: invalid loginname or password","timestamp":"2024-11-12T03:14:24.316Z"}
+{"level":"info","message":"Bot server running on port 3002","timestamp":"2024-11-12T03:14:24.319Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T03:16:14.316Z"}
+{"level":"error","message":"Failed to initialize TS3 client: invalid loginname or password","timestamp":"2024-11-12T03:16:15.391Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T03:17:44.650Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T03:20:09.354Z"}
+{"level":"error","message":"Failed to initialize TS3 client: Cannot read properties of undefined (reading 'nickname')","timestamp":"2024-11-12T03:20:09.825Z"}
+2024-11-12 04:22:07 [[32minfo[39m]: Connected to MongoDB
+2024-11-12 04:22:07 [[31merror[39m]: Failed to initialize TS3 client: Cannot read properties of undefined (reading 'nickname')
+2024-11-12 04:23:54 [[32minfo[39m]: Connected to MongoDB
+2024-11-12 04:23:55 [[31merror[39m]: Failed to initialize TS3 client: connection failed, you are banned, you may retry in 140 seconds
+2024-11-12 04:46:52 [[32minfo[39m]: Connected to MongoDB
+2024-11-12 04:46:53 [[31merror[39m]: Failed to initialize TS3 client: invalid loginname or password
+2024-11-12 04:54:24 [[32minfo[39m]: Connected to MongoDB
+2024-11-12 04:55:58 [[32minfo[39m]: Connected to MongoDB
+2024-11-12 04:55:58 [[31merror[39m]: Bot initialization failed
+  No TS3 credentials found in database
+  Context: database
+2024-11-12 04:57:51 [[32minfo[39m]: Connected to MongoDB
+2024-11-12 04:57:51 [[31merror[39m]: Bot initialization failed
+  No TS3 credentials found in database
+  Context: database
+2024-11-12 05:01:48 [[32minfo[39m]: Connected to MongoDB
+2024-11-12 05:01:48 [[31merror[39m]: Bot initialization failed
+  No TS3 credentials found in database
+  Context: database
+2024-11-12 05:01:56 [[32minfo[39m]: Connected to MongoDB
+2024-11-12 05:01:59 [[32minfo[39m]: TeamSpeak connection established
+2024-11-12 05:01:59 [[32minfo[39m]: Bot server running on port
+2024-11-12 05:03:02 [[32minfo[39m]: Connected to MongoDB
+2024-11-12 05:03:02 [[31merror[39m]: Bot initialization failed
+  No TS3 credentials found in database
+  Context: database
+2024-11-12 05:05:04 [[32minfo[39m]: Connected to MongoDB
+2024-11-12 05:05:07 [[32minfo[39m]: TeamSpeak connection established
+2024-11-12 05:05:07 [[32minfo[39m]: Bot server running on port
+2024-11-12 05:13:32 [[32minfo[39m]: Connected to MongoDB
+2024-11-12 05:13:35 [[32minfo[39m]: TeamSpeak connection established
+2024-11-12 05:13:35 [[32minfo[39m]: Bot server running on port

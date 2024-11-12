@@ -23,6 +23,11 @@ const apiPlayersRouter = require('./routes/api/players');
 
 dotenv.config();
 
+console.log('MONGODB_URI:', process.env.MONGODB_URI);
+console.log('BOT_API_PORT:', process.env.BOT_API_PORT);
+console.log('BOT_API_KEY:', process.env.BOT_API_KEY);
+console.log('Config.mongodbUri:', config.mongodbUri);
+
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);

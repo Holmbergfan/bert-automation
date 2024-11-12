@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const ts3CredentialsSchema = new mongoose.Schema({
+  _id: String,
   host: String,
   queryport: Number,
   port: Number,
@@ -10,8 +11,9 @@ const ts3CredentialsSchema = new mongoose.Schema({
   serverId: Number,
   channelId: Number
 }, { 
-  timestamps: true,
-  strict: false // Allow flexible document structure
+  collection: 'ts3_credentials', // Specify collection name
+  _id: false, // Allow custom _id
+  timestamps: true
 });
 
-module.exports = mongoose.model('TS3Credentials', ts3CredentialsSchema);
+module.exports = mongoose.model('TS3Credentials', ts3CredentialsSchema, 'ts3_credentials');

@@ -1,0 +1,18 @@
+2024-11-12 04:22:07 [[31merror[39m]: Failed to initialize TS3 client: Cannot read properties of undefined (reading 'nickname')
+2024-11-12 04:23:55 [[31merror[39m]: Failed to initialize TS3 client: connection failed, you are banned, you may retry in 140 seconds
+2024-11-12 04:46:53 [[31merror[39m]: Failed to initialize TS3 client: invalid loginname or password
+2024-11-12 04:54:24 [[31merror[39m]: Failed to initialize settings
+  Cast to ObjectId failed for value "ts3_credentials" (type string) at path "_id" for model "TS3Credentials"
+  Context: database
+2024-11-12 04:55:58 [[31merror[39m]: Bot initialization failed
+  No TS3 credentials found in database
+  Context: database
+2024-11-12 04:57:51 [[31merror[39m]: Bot initialization failed
+  No TS3 credentials found in database
+  Context: database
+2024-11-12 05:01:48 [[31merror[39m]: Bot initialization failed
+  No TS3 credentials found in database
+  Context: database
+2024-11-12 05:03:02 [[31merror[39m]: Bot initialization failed
+  No TS3 credentials found in database
+  Context: database

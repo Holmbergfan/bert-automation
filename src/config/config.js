@@ -1,43 +1,12 @@
-const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+// src/config/config.js
+
+require('dotenv').config();
 
 module.exports = {
-  mongodb: {
-    uri: process.env.MONGODB_URI,
-    options: {
-      serverSelectionTimeoutMS: 30000,
-    }
-  },
-  server: {
-    port: process.env.BOT_API_PORT || 3002,
-    cors: {
-      origin: 'http://localhost:3000',
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-      credentials: true,
-    }
-  },
-  ts3: {
-    defaultServerPort: 9987,
-    channelSettings: {
-      status: {
-        name: "━━ Bert the Bot [Online] ━━",
-        type: 0,
-        maxclients: -1,
-        codec: 4,
-        codecQuality: 10
-      }
-    },
-    commands: {
-      prefix: '!'
-    },
-    clientOptions: {
-      nickname: "Bert The Bot",
-      platform: "Node Bot",
-      version: "1.0",
-      default: {
-        channel: "Lobby",
-        clientType: 0  // 0 = Regular client, 1 = Query client
-      }
-    }
-  }
+  baseUrl: process.env.BASE_URL, // Replace with your actual base URL
+  scrapeInterval: '*/5 * * * *', // Example: Every 5 minutes
+  mongodbUri: process.env.MONGODB_URI, // Replace with your MongoDB URI
+  BOT_API_URL: process.env.BOT_API_URL || 'http://localhost:3002', // Replace with your bot's API URL
+  BOT_API_KEY: process.env.BOT_API_KEY || '332036edf6199a0c3695b50c2b562e0c06725015c823c374ada16c2e8a51a1bffe2c12bfc320ef9543b13f367204d5b4be699cebe4cddcdc0b88cfd4d51a24c7', // Securely store and manage your Bot API Key
+  // Add other configurations as needed
 };

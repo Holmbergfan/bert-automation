@@ -365,3 +365,13 @@
 {"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-11T19:35:00.096Z"}
 {"level":"error","message":"Failed to initialize TS3 client: Client ID not received","timestamp":"2024-11-11T19:35:09.762Z"}
 {"level":"info","message":"Shutting down TS3 Bot...","timestamp":"2024-11-11T19:35:54.523Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-12T02:44:25.946Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T02:44:26.682Z"}
+{"level":"info","message":"Received SIGINT. Starting graceful shutdown...","timestamp":"2024-11-12T02:44:37.767Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-12T02:52:40.648Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T02:52:41.940Z"}
+{"level":"info","message":"Received SIGINT. Starting graceful shutdown...","timestamp":"2024-11-12T02:52:44.785Z"}
+{"level":"info","message":"Bot API server is running on port 3002","timestamp":"2024-11-12T02:57:41.708Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2024-11-12T02:57:42.767Z"}
+{"level":"warn","message":"No TeamSpeak settings found in the database","timestamp":"2024-11-12T02:57:43.198Z"}
+{"level":"error","message":"Error during bot initialization: validateSettings is not defined","timestamp":"2024-11-12T02:57:43.266Z"}
